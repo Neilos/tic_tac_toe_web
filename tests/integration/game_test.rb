@@ -1,10 +1,14 @@
 require 'minitest'
 require 'minitest/autorun'
-require_relative '../../app/controllers/game.rb'
+require_relative '../../app/controllers/game'
 
 class GameTest < Minitest::Test
 
-  def test_
+  # def setup
+
+  # end
+
+  def test_root
     skip
   end
 
