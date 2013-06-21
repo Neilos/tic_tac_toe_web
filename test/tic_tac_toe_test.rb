@@ -2,6 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require_relative '../lib/tic_tac_toe'
 require_relative '../lib/human_player'
+require 'mocha/setup'
 
 class TicTacToeTest < Minitest::Test
 
@@ -23,6 +24,7 @@ class TicTacToeTest < Minitest::Test
 
   def setup
     @player1 = Player.new("player1")
+
     @player2 = Player.new("player2")
   end
 
@@ -105,12 +107,6 @@ class TicTacToeTest < Minitest::Test
     assert_equal game.player1, game.next_player # X is the first because we assume X started the game    
   end
 
-  def test_the_game_that_is_one_step_from_winning_can_calculate_the_best_move
-    game = TicTacToe.new("X 0X0    ", @player1, @player2)
-    game.next_move! # 6 is the index in the grid, 0 to 8
-    assert_equal "X 0X0 X  ", game.to_s 
-  end
-
   def test_game_over_when_finished_or_all_cells_populated
     game = TicTacToe.new("XXX 0 0  ", @player1, @player2)
     assert_equal true, game.game_won?
@@ -127,13 +123,20 @@ class TicTacToeTest < Minitest::Test
   end
   
   def test_a_game_can_be_played
-    game = TicTacToe.new("         ", @player1, @player2)
+    player1 = Player.new("player1")
+    player2 = Player.new("player2")
+    game = TicTacToe.new("         ", player1, player2)
+    player1.stubs(:choose_move).returns(0,2,4,6,8)
+    player2.stubs(:choose_move).returns(1,3,5,7)
     game.play!
     assert game.game_over?
   end
 
   def test_a_game_knows_who_the_winner_is
-    game = TicTacToe.new("X 0X0    ", @player1, @player2)
+    player1 = Player.new("player1")
+    player1.stubs(:choose_move).returns(6)
+    player2 = Player.new("player2")
+    game = TicTacToe.new("X 0X0    ", player1, player2)
     game.play!
     assert @player1, game.winner
   end

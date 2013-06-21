@@ -7,9 +7,9 @@ class TicTacToe
   CROSS = "X"
   NOUGHT = "0"
   SPACE = " "
-  LINE = "\n----------------------------\n"
-  BOARD_HORIZONTAL = "\n-----------\n"
-  BOARD_VERTICAL = "|"
+  # LINE = "\n----------------------------\n"
+  # BOARD_HORIZONTAL = "\n-----------\n"
+  # BOARD_VERTICAL = "|"
 
   def initialize(board_string, cross_player, nought_player)
     raise RuntimeError unless board_string.size == 9
@@ -72,7 +72,7 @@ private
     begin
       move = player.choose_move(board)
       return move if legal? move
-      print "#{move} is invalid! Choose an empty postion (0,1,2,3,4,5,6,7,8): "
+      # print "#{move} is invalid! Choose an empty postion (0,1,2,3,4,5,6,7,8): "
     end until legal?(move)
   end
 
