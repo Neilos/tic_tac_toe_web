@@ -1,2 +1,2 @@
-require './game.rb'
+require './app/controllers/game.rb'
 run Game

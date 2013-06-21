@@ -1,6 +1,6 @@
 require 'minitest'
 require 'minitest/autorun'
-require_relative '../lib/line_aware'
+require_relative '../../app/models/line_aware'
 
 class LineAwareClass
   include LineAware

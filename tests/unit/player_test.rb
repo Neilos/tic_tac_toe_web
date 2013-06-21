@@ -1,6 +1,6 @@
 require 'minitest'
 require 'minitest/autorun'
-require_relative '../lib/player'
+require_relative '../../app/models/player'
 
 class PersonTest < MiniTest::Test
 

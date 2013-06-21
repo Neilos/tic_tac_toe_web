@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
-require_relative '../lib/tic_tac_toe'
-require_relative '../lib/human_player'
+require_relative '../../app/models/tic_tac_toe'
+require_relative '../../app/models/human_player'
 require 'mocha/setup'
 
 class TicTacToeTest < Minitest::Test
