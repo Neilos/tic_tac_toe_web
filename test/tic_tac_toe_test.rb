@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
-require '../lib/tic_tac_toe'
-require '../lib/human_player'
+require_relative '../lib/tic_tac_toe'
+require_relative '../lib/human_player'
 
 class TicTacToeTest < Minitest::Test
 
@@ -51,12 +51,6 @@ class TicTacToeTest < Minitest::Test
     game = TicTacToe.new("X XOX0X0X", @player1, @player2)
     string_representation = "X XOX0X0X"
     assert_equal string_representation, game.to_s
-  end
-
-  def test_print
-    game = TicTacToe.new("X XOX0X0X", @player1, @player2)
-    print_output = "\n\n X |   | X \n-----------\n O | X | 0 \n-----------\n X | 0 | X \n"
-    assert_equal print_output, game.game_table
   end
 
   def test_the_game_is_line_aware

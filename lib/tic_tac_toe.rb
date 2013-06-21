@@ -51,18 +51,18 @@ class TicTacToe
     board.join
   end
 
-  def game_table
-    string = "\n\n" + (0..8).map { |i| "#{ BOARD_HORIZONTAL if i % 3 ==0 && i != 0 }" + "#{ BOARD_VERTICAL if (i % 3 == 1) || (i % 3 == 2) }" + "#{ SPACE + board[i] + SPACE }" }.join + "\n"
-  end
+  # def game_table
+  #   string = "\n\n" + (0..8).map { |i| "#{ BOARD_HORIZONTAL if i % 3 ==0 && i != 0 }" + "#{ BOARD_VERTICAL if (i % 3 == 1) || (i % 3 == 2) }" + "#{ SPACE + board[i] + SPACE }" }.join + "\n"
+  # end
 
   def play!
-    print "NEW GAME!"
+    # print "NEW GAME!"
     until game_over?
-      print game_table + LINE + "#{next_player}'s turn. "
+      # print game_table + LINE + "#{next_player}'s turn. "
       next_move!
     end
-    print game_table + (game_won? ? "\n\nGAMES OVER.\nTHE WINNER IS #{winner}!" + LINE : "\n\nGAMES OVER.\nIT'S A DRAW!" + LINE)
-    board
+    # print game_table + (game_won? ? "\n\nGAMES OVER.\nTHE WINNER IS #{winner}!" + LINE : "\n\nGAMES OVER.\nIT'S A DRAW!" + LINE)
+    # board
   end
 
 
