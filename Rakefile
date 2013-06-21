@@ -10,6 +10,7 @@ Rake::TestTask.new("test:integration") do |t|
   t.verbose = true
 end
 
+
 Rake::TestTask.new("test:all") do |t|
   t.test_files = FileList['tests/**/*.rb']
   t.verbose = true

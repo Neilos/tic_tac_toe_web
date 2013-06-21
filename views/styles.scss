@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'crayon';
+  src: url("Crayon.ttf") format("truetype");
+}
+
+body {
+  font-family: 'crayon';
+  font-size: 2em;
+  color: white;
+
+  div.container{
+    width: 20em;
+    margin: auto;
+    padding-top: 1em;
+    padding-left: 4em;
+    padding-right: 4em;
+    padding-bottom: 2em;
+    background-image:url('blackboard.jpg');
+  }
+
+  table.board {
+    border-spacing: 0;
+
+    tr > td{
+      font-size: 1.5em;
+      width: 1.5em;
+      height: 1.5em;
+      border-bottom: 0.08em solid white;
+      text-align: center;
+      vertical-align: center;
+    }
+
+    td:nth-of-type(2n){
+      border-left: 0.08em solid white;
+      border-right: 0.08em solid white;
+    }
+
+    tr:nth-of-type(3) > td{
+      border-bottom: 0;
+    }
+  }
+}
+

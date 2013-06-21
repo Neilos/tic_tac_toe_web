@@ -1,8 +1,0 @@
-@font-face {
-  font-family: 'crayon';
-  src: url("Crayon.ttf") format("truetype");
-}
-
-body {
-  font-family: 'crayon';
-}

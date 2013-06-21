@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sass'
 
 class Game < Sinatra::Base
   
@@ -9,5 +10,7 @@ end
 get '/' do
   erb 'pages/main'.to_sym
 end
-  
+
+get('/styles.css'){ scss :styles }
+
 end
