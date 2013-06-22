@@ -2,12 +2,15 @@
 <html>
   <head>
     <link type="text/css" href="styles.css" rel="stylesheet">
+    <script src='http://code.jquery.com/jquery-latest.min.js'></script>
+    <script src="/javascripts/main.js"></script>
   </head>
   <body>
     <div class=container>
       <h2>Tic Tac Toe</h2>
+      <button onclick="myFunction()">Try it</button>
       <br/>
-      <table class="board">
+      <table id="board">
         <tr>
         <% @squares.each_with_index do |square, number| %>
           <%= "</tr><tr>" if number % 3 ==0 && number > 0 %>
