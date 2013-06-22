@@ -5,8 +5,6 @@ require 'rack/test'
 
 class GameTest < Minitest::Test
   include Rack::Test::Methods
-  # def setup
-  # end
 
   def app
     Game.new
@@ -16,12 +14,13 @@ class GameTest < Minitest::Test
     get '/'
     assert last_response.ok?
     assert_includes last_response.body, 'Tic Tac Toe'
-    assert_includes last_response.body, '<table class="board">'
+    assert_includes last_response.body, '<table id="board">'
   end
 
-  def test_new_game
-    post '/new'
+  def test_nextmove
+    post '/nextmove', :board => 'XOXOXOXOX'
     assert last_response.ok?
+    assert_equal 'XOXOXOXOX', last_response.body
   end
 
 

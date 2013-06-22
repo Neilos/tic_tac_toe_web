@@ -1,12 +1,13 @@
-function mark_square(square) {
-  square.text('N');
+function mark_square(square, mark) {
+  square.text(mark);
 }
 
 function empty_square(square) {
   return square.text() == ' ';
 }
 
-function get_clicked_square(target){
+function get_clicked_square(event){
+  var target = $(event.target);
   if (target.is('td')) {
     return target;
   } else if (target.parents('td').length) {
@@ -14,22 +15,35 @@ function get_clicked_square(target){
   }
 }
 
-$(document).ready(
+function board_squares() {
+  return $('table#board td');
+}
 
-  function() {
+function player_mark() {
+  return 'N'
+}
 
-    $('table#board').click(
-      function(event) {
-        var clicked_element = $(event.target);
-        var this_square = get_clicked_square(clicked_element);
-        
-        if (empty_square(this_square)) {
-          mark_square(this_square);
-          var all_square_values = $('table#board td').text() || [];
-          alert(all_square_values);
-        }
+function set_board_values(new_values) {
+  var new_values_array = new_values.split('');
+  var table_values = board_squares();
+  table_values.each(function(index) {
+    $(this).text(new_values_array[index]);
+  });
+}
+
+$(document).ready(function() {
+
+  $('table#board').click(
+    function(event) {
+      var this_square = get_clicked_square(event);
+      var board_values;
+      if (empty_square(this_square)) {
+        mark_square(this_square, player_mark());
+        board_values = board_squares().text();
+        $.post("/nextmove", {board: board_values} ).done(
+          function(data){ set_board_values(data) }
+        )
       }
-    );
-  }
-
-);
+    }
+  );
+});
