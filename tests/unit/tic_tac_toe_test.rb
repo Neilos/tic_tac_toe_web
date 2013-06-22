@@ -107,7 +107,25 @@ class TicTacToeTest < Minitest::Test
     assert_equal game.player1, game.next_player # X is the first because we assume X started the game    
   end
 
-  def test_game_over_when_finished_or_all_cells_populated
+  def test_next_move_asks_player_for_move
+    game = TicTacToe.new("         ", @player1, @player2)
+    @player1.expects(:choose_move).returns(1)
+    game.next_move!
+  end
+
+  def test_next_move_returns_board
+    game = TicTacToe.new("         ", @player1, @player2)
+    @player1.expects(:choose_move).returns(1)
+    assert_equal " X       ", game.next_move!
+  end
+
+  def test_next_move_can_handle_nil_responses_from_players
+    game = TicTacToe.new("         ", @player1, @player2)
+    @player1.expects(:choose_move).returns(nil)
+    game.next_move!
+  end
+
+  def test_game_over_when_won_or_all_cells_populated
     game = TicTacToe.new("XXX O O  ", @player1, @player2)
     assert_equal true, game.game_won?
     assert_equal true, game.game_over?
@@ -116,19 +134,16 @@ class TicTacToeTest < Minitest::Test
     assert_equal true, game.game_over?
   end
 
-  def test_game_NOT_over_until_finished_or_all_cells_populated
+  def test_game_NOT_over_until_won_or_all_cells_populated
     game = TicTacToe.new("XOXXXOOX ", @player1, @player2)
     refute game.game_won?
     refute game.game_over?
   end
-  
-  def test_a_game_can_be_played
-    player1 = Player.new("player1")
-    player2 = Player.new("player2")
-    game = TicTacToe.new("         ", player1, player2)
-    player1.stubs(:choose_move).returns(0,2,4,6,8)
-    player2.stubs(:choose_move).returns(1,3,5,7)
-    game.play!
+
+  def test_next_move_does_NOT_ask_player_for_move_when_game_over
+    game = TicTacToe.new("XOXXXOOXO", @player1, @player2)
+    assert game.game_over?
+    game.next_move! # no mocking of player choose_move method so will raise NotImplementedError if player is asked for move
     assert game.game_over?
   end
 
@@ -137,7 +152,7 @@ class TicTacToeTest < Minitest::Test
     player1.stubs(:choose_move).returns(6)
     player2 = Player.new("player2")
     game = TicTacToe.new("X OXO    ", player1, player2)
-    game.play!
+    game.next_move!
     assert @player1, game.winner
   end
 

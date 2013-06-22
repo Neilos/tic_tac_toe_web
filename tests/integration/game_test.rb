@@ -19,5 +19,10 @@ class GameTest < Minitest::Test
     assert_includes last_response.body, '<table class="board">'
   end
 
+  def test_new_game
+    post '/new'
+    assert last_response.ok?
+  end
+
 
 end

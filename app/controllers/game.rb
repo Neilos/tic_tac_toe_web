@@ -13,13 +13,14 @@ end
 before do
   @player1 = HumanPlayer.new("Dave")
   @player2 = HumanPlayer.new("Jeff")
-  game = TicTacToe.new("X O X    ", @player1, @player2)
-  @squares = game.to_s.split('')
+  @game = TicTacToe.new("X O X    ", @player1, @player2)
+  @squares = game.board
 end
 
 get('/styles.css'){ scss :'stylesheets/styles' }
 
 get '/' do
+  @game.next_move!
   erb 'pages/main'.to_sym
 end
 

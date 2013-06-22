@@ -41,40 +41,20 @@ class TicTacToe
   end
 
   def next_move!
-    board[get_move_from next_player] = next_player.mark 
+    move = get_move_from next_player unless game_over?
+    board[move] = next_player.mark if move
+    to_s
   end
 
   def to_s
     board.join
   end
 
-  # def game_table
-  #   string = "\n\n" + (0..8).map { |i| "#{ BOARD_HORIZONTAL if i % 3 ==0 && i != 0 }" + "#{ BOARD_VERTICAL if (i % 3 == 1) || (i % 3 == 2) }" + "#{ SPACE + board[i] + SPACE }" }.join + "\n"
-  # end
-
-  def play!
-    # print "NEW GAME!"
-    until game_over?
-      # print game_table + LINE + "#{next_player}'s turn. "
-      next_move!
-    end
-    # print game_table + (game_won? ? "\n\nGAMES OVER.\nTHE WINNER IS #{winner}!" + LINE : "\n\nGAMES OVER.\nIT'S A DRAW!" + LINE)
-    # board
-  end
-
 
 private
 
   def get_move_from(player)
-    begin
       move = player.choose_move(board)
-      return move if legal? move
-      # print "#{move} is invalid! Choose an empty postion (0,1,2,3,4,5,6,7,8): "
-    end until legal?(move)
-  end
-
-  def legal?(move)
-    board[move] == SPACE && [0,1,2,3,4,5,6,7,8].include?(move)
   end
 
   def difference_between(number_of)
