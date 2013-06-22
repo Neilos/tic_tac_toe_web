@@ -24,26 +24,26 @@ end
 def test_player_can_choose_winning_move
   player = ComputerPlayer.new("player")
   player.mark = TicTacToe::CROSS
-  assert_equal 6, player.choose_move("X 0X0    ")
+  assert_equal 6, player.choose_move("X OXO    ")
 end
 
 def test_player_can_block_winning_move_by_other_player
   player = ComputerPlayer.new("player")
   player.mark = TicTacToe::NOUGHT
-  assert_equal 6, player.choose_move("X 0X0    ")
+  assert_equal 6, player.choose_move("X OXO    ")
 end
 
 def test_player_can_pick_the_only_empty_space
   player = ComputerPlayer.new("player")
   player.mark = TicTacToe::CROSS
-  move = player.choose_move("0 XX000XX")
+  move = player.choose_move("O XXOOOXX")
   assert_equal 1, move, "#{move} is not an empty position"
 end
 
 def test_player_can_given_a_choice_pick_an_empty_space
   player = ComputerPlayer.new("player")
   player.mark = TicTacToe::CROSS
-  move = player.choose_move("0X0 X X0X")
+  move = player.choose_move("OXO X XOX")
   assert [3,5].include?(move), "#{move} is not an empty position"
 end
 
@@ -74,7 +74,7 @@ end
 def test_force_win_if_available
   player = ComputerPlayer.new("player2")
   player.mark = TicTacToe::CROSS
-  move = player.choose_move("X0  X   0")
+  move = player.choose_move("XO  X   O")
   assert [3,6].include?(move), "#{move} is not where it should be"
 end
 

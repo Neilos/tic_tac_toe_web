@@ -6,34 +6,13 @@
   <body>
     <div class=container>
       <h2>Tic Tac Toe</h2>
-      <table>
-        <tr>
-          <td>Player 1:</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Player 2:</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
       <br/>
       <table class="board">
         <tr>
-          <td>X</td>
-          <td>O</td>
-          <td>O</td>
-        </tr>
-        <tr>
-          <td>O</td>
-          <td>X</td>
-          <td>O</td>
-        </tr>
-        <tr>
-          <td>X</td>
-          <td></td>
-          <td>X</td>
+        <% @squares.each_with_index do |square, number| %>
+          <%= "</tr><tr>" if number % 3 ==0 && number > 0 %>
+          <td><%= square %></td>
+        <% end %>
         </tr>
       </table>
     </div>

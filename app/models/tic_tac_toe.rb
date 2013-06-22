@@ -5,11 +5,8 @@ class TicTacToe
   include LineAware
   attr_reader :board, :player1, :player2
   CROSS = "X"
-  NOUGHT = "0"
+  NOUGHT = "O"
   SPACE = " "
-  # LINE = "\n----------------------------\n"
-  # BOARD_HORIZONTAL = "\n-----------\n"
-  # BOARD_VERTICAL = "|"
 
   def initialize(board_string, cross_player, nought_player)
     raise RuntimeError unless board_string.size == 9
