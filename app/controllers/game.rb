@@ -16,6 +16,18 @@ before do
   @player2 = ComputerPlayer.new("Jeff")
 end
 
+def generate_game_instructions(game)
+  if game.game_won?
+    "The winner is #{game.winner}"
+  elsif game.game_over?
+    "It's a draw"
+  elsif game.to_s == "         "
+    "New Game! #{game.next_player} is #{game.next_player.mark}s."
+  else
+    "#{game.next_player}'s turn. #{game.next_player} is #{game.next_player.mark}s."
+  end
+end
+
 get('/styles.css'){ scss :'stylesheets/styles' }
 
 get '/' do
@@ -27,7 +39,8 @@ end
 post '/nextmove' do
   game = TicTacToe.new(params[:board], @player1, @player2)
   game.next_move!
-  {:board => game.to_s, :game_instructions => "hello there"}.to_json
+  { :board => game.to_s, 
+    :game_instructions => generate_game_instructions(game) }.to_json
 end
 
 end
