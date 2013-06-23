@@ -20,8 +20,7 @@ function board_squares() {
 }
 
 function where_to_show_game_instructions() {
-  // return $('div#game_instructions');
-  true
+  return $('div#game_instructions');
 }
 
 function player_mark() {
@@ -38,7 +37,7 @@ function set_board_values(new_values) {
 
 function show_game_instructions(instructions) {
   var placement = where_to_show_game_instructions();
-  alert(instructions);
+  placement.text(instructions);
 }
 
 
