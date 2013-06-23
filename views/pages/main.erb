@@ -1,9 +1,13 @@
-<h2>Tic Tac Toe</h2>
+<h1>Tic Tac Toe</h1>
 <input id="game_state" type="hidden"/>
 <input id="player_mark" type="hidden"/>
 <p id="game_instructions">
   <%= @game_instructions %>
 </p>
-<br/>
+<div id="tables">
 <%= erb :'partials/_tic_tac_toe_board' %>
+<%= erb :'partials/_players_table' %>
+</div>
 <%= erb :'partials/_button' %>
+
+

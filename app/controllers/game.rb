@@ -19,15 +19,15 @@ end
 
 def generate_game_instructions(game)
   if game.game_won? && game.valid?
-    "The winner is #{game.winner}"
+    "Game over. The winner is #{game.winner}!"
   elsif game.game_won?
     "Game over. Play again?"
   elsif game.game_over?
-    "Game over. It's a draw"
+    "Game over. It's a draw!"
   elsif game.to_s == "         "
-    "New Game! #{game.next_player}'s turn first. #{game.next_player} is '#{game.next_player.mark}'s."
+    "New Game! #{game.next_player}'s turn first (#{game.next_player} is '#{game.next_player.mark}'s)"
   else
-    "#{game.next_player}'s turn. #{game.next_player} is '#{game.next_player.mark}'s."
+    "#{game.next_player}'s turn (#{game.next_player} is '#{game.next_player.mark}'s)"
   end
 end
 
