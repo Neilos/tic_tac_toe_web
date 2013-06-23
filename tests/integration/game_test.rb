@@ -10,11 +10,16 @@ class GameTest < Minitest::Test
     Game.new
   end
 
+  def test_new_game
+    skip
+  end
+
   def test_root
     get '/'
     assert last_response.ok?
     assert_includes last_response.body, 'Tic Tac Toe'
     assert_includes last_response.body, '<table id="board">'
+    assert_includes last_response.body, '<div id="game_instructions">'
   end
 
   def test_nextmove

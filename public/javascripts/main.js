@@ -19,17 +19,28 @@ function board_squares() {
   return $('table#board td');
 }
 
+function where_to_show_game_instructions() {
+  // return $('div#game_instructions');
+  true
+}
+
 function player_mark() {
-  return 'N'
+  return 'X'
 }
 
 function set_board_values(new_values) {
   var new_values_array = new_values.split('');
-  var table_values = board_squares();
-  table_values.each(function(index) {
+  var table = board_squares();
+  table.each(function(index) {
     $(this).text(new_values_array[index]);
   });
 }
+
+function show_game_instructions(instructions) {
+  var placement = where_to_show_game_instructions();
+  alert(instructions);
+}
+
 
 $(document).ready(function() {
 
@@ -40,8 +51,12 @@ $(document).ready(function() {
       if (empty_square(this_square)) {
         mark_square(this_square, player_mark());
         board_values = board_squares().text();
-        $.post("/nextmove", {board: board_values} ).done(
-          function(data){ set_board_values(data) }
+        $.post("/nextmove", {board: board_values, another: "parameter value"} ).done(
+          function(data){ 
+            var obj = jQuery.parseJSON( data );
+            set_board_values(obj.board)
+            show_game_instructions(obj.game_instructions)
+          }
         )
       }
     }
