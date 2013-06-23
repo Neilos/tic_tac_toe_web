@@ -6,7 +6,7 @@ function is_empty_square(square) {
   return square.text() == ' ';
 }
 
-function get_clicked_square(event){
+function get_clicked_table_square(event){
   var target = $(event.target);
   if (target.is('td')) {
     return target;
@@ -20,19 +20,23 @@ function board_squares() {
 }
 
 function where_to_show_game_instructions() {
-  return $('div#game_instructions');
+  return $('#game_instructions');
 }
 
 function player_mark() {
-  return 'X'
+  return $('input#player_mark').text() || 'X';
+}
+
+function set_player_mark(mark) {
+  $('input#player_mark').text(mark);
 }
 
 function set_game_state(state) {
-  $('input#game_state').text(state)
+  $('input#game_state').text(state);
 }
 
 function is_game_over() {
-  return $('input#game_state').text() == 'game_over'
+  return $('input#game_state').text() == 'game_over';
 }
 
 function set_board_values(new_values) {
@@ -53,9 +57,10 @@ function post_board_values() {
   $.post("/nextmove", data).done(
     function(data){ 
       var obj = jQuery.parseJSON( data );
-      set_board_values(obj.board)
-      show_game_instructions(obj.game_instructions)
-      set_game_state(obj.game_state);
+      set_board_values( obj.board );
+      show_game_instructions( obj.game_instructions );
+      set_game_state( obj.game_state );
+      set_player_mark( obj.next_player_mark );
     }
   )
 }
@@ -65,7 +70,7 @@ $(document).ready(function() {
 
   $('table#board').click(
     function(event) {
-      var this_square = get_clicked_square(event);
+      var this_square = get_clicked_table_square(event);
       if (is_empty_square(this_square) && !is_game_over()) {
         mark_square(this_square, player_mark());
         post_board_values();

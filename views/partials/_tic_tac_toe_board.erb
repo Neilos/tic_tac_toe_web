@@ -1,0 +1,8 @@
+<table id="board">
+  <tr>
+  <% @squares.each_with_index do |square, number| %>
+    <%= "</tr><tr>" if number % 3 ==0 && number > 0 %>
+    <td <%="id='square#{number}'"%> ><%= square %></td>
+  <% end %>
+  </tr>
+</table>

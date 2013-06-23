@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link type="text/css" href="styles.css" rel="stylesheet">
-    <script src='http://code.jquery.com/jquery-latest.min.js'></script>
-    <script src="/javascripts/main.js"></script>
-  </head>
-  <body>
-    <div class=container>
-      <h2>Tic Tac Toe</h2>
-      <input id="game_state" type="hidden"/>
-      <div id="game_instructions">
-        <br/>
-      </div>
-      <br/>
-      <table id="board">
-        <tr>
-        <% @squares.each_with_index do |square, number| %>
-          <%= "</tr><tr>" if number % 3 ==0 && number > 0 %>
-          <td <%="id='square#{number}'"%> ><%= square %></td>
-        <% end %>
-        </tr>
-      </table>
-      <button type="button"><a href="/newgame">New Game</a></button>
-    </div>
-  </body>
-</html>
+<h2>Tic Tac Toe</h2>
+<input id="game_state" type="hidden"/>
+<input id="player_mark" type="hidden"/>
+<p id="game_instructions">
+  <%= @game_instructions %>
+</p>
+<br/>
+<%= erb :'partials/_tic_tac_toe_board' %>
+<%= erb :'partials/_button' %>
