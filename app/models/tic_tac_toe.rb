@@ -36,6 +36,10 @@ class TicTacToe
     next_player==player1 ? player2 : player1
   end
 
+  def loser
+    next_player==player1 ? player1 : player2
+  end
+
   def next_player
     (count of: CROSS, within: board) > (count of: NOUGHT, within: board) ? player2 : player1
   end

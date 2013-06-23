@@ -9,7 +9,7 @@ body {
   color: white;
 
   div.container{
-    width: 800px;
+    width: 750px;
     margin: auto;
     padding-top: 1em;
     padding-left: 2em;
@@ -31,18 +31,18 @@ body {
       color: white;
       background: transparent;
       border: 0;
+      height: 1.5em;
     }
 
     #board_div {
       margin: 1em;
-      margin-left: 0;
       margin-right: 2em;
 
       table#board {
         border-spacing: 0;
 
         tr > td{
-          font-size: 1.5em;
+          font-size: 2em;
           width: 1.5em;
           height: 1.5em;
           border-bottom: 0.08em solid white;
@@ -66,6 +66,7 @@ body {
 
     #players_div {
       margin: 1em;
+      margin-left: 2em;
       margin-right: 0;
 
       table#players_table {

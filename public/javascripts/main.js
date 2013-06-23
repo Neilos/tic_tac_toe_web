@@ -47,18 +47,44 @@ function set_board_values(new_values) {
   });
 }
 
+function populate_players_table( json_object ) {
+  $('#player1_name').text( json_object.player1_name );
+  $('#player1_won').text( json_object.player1_won );
+  $('#player1_lost').text( json_object.player1_lost );
+  $('#player1_drawn').text( json_object.player1_drawn );
+  $('#player2_name').text( json_object.player2_name );
+  $('#player2_won').text( json_object.player2_won );
+  $('#player2_lost').text( json_object.player2_lost );
+  $('#player2_drawn').text( json_object.player2_drawn );
+}
+
 function show_game_instructions(instructions) {
   var placement = where_to_show_game_instructions();
   placement.text(instructions);
 }
 
+function get_data() {
+  var data = {
+    board: board_squares().text(),
+    player1_name: $('#player1_name').val(),
+    player1_won: $('#player1_won').text(),
+    player1_lost: $('#player1_lost').text(),
+    player1_drawn: $('#player1_drawn').text(),
+    player2_name: $('#player2_name').val(),
+    player2_won: $('#player2_won').text(),
+    player2_lost: $('#player2_lost').text(),
+    player2_drawn: $('#player2_drawn').text()
+  }
+  return data;
+}
+
 function post_board_values() {
-  var data = { board: board_squares().text() }
-  $.post("/nextmove", data).done(
+  $.post("/nextmove", get_data()).done(
     function(data){ 
       var obj = jQuery.parseJSON( data );
-      set_board_values( obj.board );
       show_game_instructions( obj.game_instructions );
+      set_board_values( obj.board );
+      populate_players_table( obj );
       set_game_state( obj.game_state );
       set_player_mark( obj.next_player_mark );
     }

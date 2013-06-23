@@ -156,5 +156,14 @@ class TicTacToeTest < Minitest::Test
     assert @player1, game.winner
   end
 
+  def test_a_game_knows_who_the_loser_is
+    player1 = Player.new("player1")
+    player1.stubs(:choose_move).returns(6)
+    player2 = Player.new("player2")
+    game = TicTacToe.new("X OXO    ", player1, player2)
+    game.next_move!
+    assert @player2, game.loser
+  end
+
 
 end

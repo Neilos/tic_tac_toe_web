@@ -1,28 +1,33 @@
 <div id="players_div">
-  <table id="players_table">
-    <tr>
-      <th>PLAYERS:</th>
-      <th>
-        <input class="players" type="text" autocomplete="on"></input>
-      </th>
-      <th>
-        <input class="players" type="text" autocomplete="on"></input>
-      </th>
-    </tr>
-    <tr>
-      <th>WON:</th>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>LOST:</th>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>DRAWN:</th>
-      <td></td>
-      <td></td>
-    </tr>
-  </table>
+  <br/>
+  <form action="/" method="get">
+    <table id="players_table">
+      <tr>
+        <th>PLAYERS:</th>
+        <th>
+          <input id="player1_name" name="player1_name" value=<%= "'#{@player1_name}'" %> type="text" size="10" autocomplete="on"></input>
+        </th>
+        <th>
+          <input id="player2_name" name="player2_name" value=<%= "'#{@player2_name}'" %> type="text" size="10" autocomplete="on"></input>
+        </th>
+      </tr>
+      <tr>
+        <th>WON:</th>
+        <td id="player1_won"><%= "#{@player1_won}" %></td>
+        <td id="player2_won"><%= "#{@player2_won}" %></td>
+      </tr>
+      <tr>
+        <th>LOST:</th>
+        <td id="player1_lost"><%= "#{@player1_lost}" %></td>
+        <td id="player2_lost"><%= "#{@player2_lost}" %></td>
+      </tr>
+      <tr>
+        <th>DRAWN:</th>
+        <td id="player1_drawn"><%= "#{@player1_drawn}" %></td>
+        <td id="player2_drawn"><%= "#{@player2_drawn}" %></td>
+      </tr>
+    </table>
+    <br/>
+    <%= erb :'partials/_button' %>
+  </form>
 </div>
