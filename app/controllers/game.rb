@@ -58,8 +58,8 @@ get '/' do
   @player2_lost = (session[@player2_name] && session[@player2_name][:lost]) || 0
   @player2_drawn = (session[@player2_name] && session[@player2_name][:drawn]) || 0
   
-  player1 = HumanPlayer.new(@player1_name)
-  player2 = HumanPlayer.new(@player2_name)
+  player1 = @player1_name=="computer" ? ComputerPlayer.new(@player1_name) : HumanPlayer.new(@player1_name)
+  player2 = @player2_name=="computer" ? ComputerPlayer.new(@player2_name) : HumanPlayer.new(@player2_name)
   game = TicTacToe.new("         ", player1, player2)
   @squares = game.board
   @game_instructions = game_instructions(game)
@@ -69,23 +69,24 @@ end
 
 
 post '/nextmove' do
-  player1_name = params[:player1_name] == "" ? "player 1" : params[:player1_name]
-  player2_name = params[:player2_name] =="" ? "player 2" : params[:player2_name]
+  player1_name = params[:player1_name]=="" ? "player 1" : params[:player1_name]
+  player2_name = params[:player2_name]=="" ? "player 2" : params[:player2_name]
 
   session[player1_name] = {} unless session[player1_name]
   session[player2_name] = {} unless session[player2_name]
 
-  player1 = HumanPlayer.new(player1_name)
-  player2 = HumanPlayer.new(player2_name)
+  player1 = player1_name=="computer" ? ComputerPlayer.new(player1_name) : HumanPlayer.new(player1_name)
+  player2 = player2_name=="computer" ? ComputerPlayer.new(player2_name) : HumanPlayer.new(player2_name)
+
   game = TicTacToe.new(params[:board], player1, player2)
   game.next_move! unless game.game_over?
 
   # if game.game_won?
-    # session[game.winner.to_s][:won] += 1 if session[game.winner.to_s]
-    # session[game.loser.to_s][:lost] += 1 if session[game.loser.to_s]
+  #   session[game.winner.to_s][:won] += 1 if session[game.winner.to_s]
+  #   session[game.loser.to_s][:lost] += 1 if session[game.loser.to_s]
   # elsif game.game_over?
-    # session[player1_name][:drawn] += 1 if session[player1_name]
-    # session[player2_name][:drawn] += 1 if session[player2_name]
+  #   session[player1_name][:drawn] += 1 if session[player1_name]
+  #   session[player2_name][:drawn] += 1 if session[player2_name]
   # end
 
   { :board => game.to_s, 
